@@ -3,7 +3,7 @@ $conn = mysqli_connect("localhost", 'root' , '', "anime") or die("Connection fai
 
 
 $websiteTitle = "Zoro";
-$websiteUrl = "//{$_SERVER['SERVER_NAME']}/zoro";
+$websiteUrl = "//{$_SERVER['SERVER_NAME']}";
 $websiteLogo = $websiteUrl . "/files/images/logo_zoro.png";
 $contactEmail = "@gmail.com";
 
@@ -14,7 +14,7 @@ $github = "https://github.com/kirixen";
 $twitter = "https://x.com/KiriX3n";
  
 $disqus = "https://.disqus.com/embed.js";
-$api = "https://aniwatch-api1-two.vercel.app"; 
+$api = ""; 
 
 $banner = $websiteUrl . "/files/images/banner.png";
 ?>
