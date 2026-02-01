@@ -1,6 +1,6 @@
-# 🎌 Zoro.to - Clone
+# Zoro.to - Clone
 
-> **Status**: 🚀 **Project Revival in Progress**
+> **Status**: **Project Revival in Progress**
 
 This project is a revival of an anime streaming platform. Feel free to customize it as you like!
 
@@ -8,8 +8,8 @@ This project is a revival of an anime streaming platform. Feel free to customize
 ## 📋 Requirements
 
 ### System Requirements
-- **PHP**: 7.4 or higher
-- **MySQL**: 5.7 or higher (or MariaDB)
+- **PHP**
+- **MySQL**
 - **Web Server**: Apache with mod_rewrite enabled
 
 ### Development Environment
@@ -113,26 +113,28 @@ This project is open source and available under the [MIT License](LICENSE).
 - ✅ Fixed anime link URLs to point to `/anime/{id}` instead of direct episode links
 - ✅ Updated sidebar and recent releases sections
 
-## �📋 TODO - Zoro.to Clone Roadmap
+## TODO - Zoro.to Clone Roadmap
 
 
 - [x] **Authentication System**
   - [x] Registration and login
   - [x] Profile
-  - [x] Favorites/Bookmarks system
+  - [x] Bookmark system
+  - [ ] Bookmark folders (like completed, plan to watch, etc.)
+  - [ ] Deleting account
+  - [ ] Import/Export list
 
 - [ ] **Search**
   - [ ] Advanced search filters
 
 - [ ] **Features**
   - [ ] Comment system for episodes
-  - [ ] sharing integration
-
+        
 - [ ] **Performance**
   - [ ] Caching system implementation
 
 - [ ] **Advanced Features**
-  - [ ] Watch party functionality
+  - [ ] W2G functionality
 
 ---
 
