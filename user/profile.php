@@ -47,7 +47,6 @@ if(isset($_COOKIE['userID'])){
     
   <link rel="stylesheet" href="<?=$websiteUrl?>/files/css/min.css?v=<?=$version?>">
   <style>
-    /* Modern Modal Styling */
     .modal-backdrop {
       background-color: rgba(0, 0, 0, 0.85) !important;
     }
@@ -102,10 +101,9 @@ if(isset($_COOKIE['userID'])){
       overflow-y: auto;
     }
     
-    /* Avatar Grid */
     .avatar-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 20px;
       padding: 10px 0;
     }
@@ -158,7 +156,6 @@ if(isset($_COOKIE['userID'])){
       object-fit: cover;
     }
     
-    /* Close Button Styling */
     .modal-footer {
       background-color: #2a2a2a;
       border-top: none;
@@ -189,7 +186,6 @@ if(isset($_COOKIE['userID'])){
       transform: translateY(0);
     }
     
-    /* Profile Avatar Styling */
     .profile-avatar {
       cursor: pointer;
       transition: transform 0.2s;
@@ -203,10 +199,10 @@ if(isset($_COOKIE['userID'])){
     
     .avatar-edit-icon {
       position: absolute;
-      bottom: -5px; /* Moved further down */
+      bottom: -5px;
       right: 5px;
-      background-color: rgba(0, 0, 0, 0.7); /* Darker background */
-      color: white; /* White color for the icon */
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
       width: 30px;
       height: 30px;
       border-radius: 50%;
@@ -219,14 +215,13 @@ if(isset($_COOKIE['userID'])){
     }
     
     .avatar-edit-icon:hover {
-      background-color: rgba(0, 0, 0, 0.9); /* Darker on hover */
+      background-color: rgba(0, 0, 0, 0.9);
     }
     
     .avatar-edit-icon i {
       font-size: 14px;
     }
     
-    /* Scrollbar Styling */
     #modalavatars .modal-body::-webkit-scrollbar {
       width: 8px;
     }
@@ -245,7 +240,6 @@ if(isset($_COOKIE['userID'])){
       background: #5a5a5a;
     }
     
-    /* Responsive Design */
     @media (max-width: 576px) {
       #modalavatars .modal-dialog {
         margin: 10px;
@@ -253,7 +247,7 @@ if(isset($_COOKIE['userID'])){
       }
       
       .avatar-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 15px;
       }
       
@@ -271,12 +265,6 @@ if(isset($_COOKIE['userID'])){
       .btn-close-modal {
         min-width: 150px;
         padding: 10px 30px;
-      }
-    }
-    
-    @media (max-width: 400px) {
-      .avatar-grid {
-        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
