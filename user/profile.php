@@ -46,6 +46,240 @@ if(isset($_COOKIE['userID'])){
   <link rel="stylesheet" href="<?=$websiteUrl?>/files/css/style.css?v=<?=$version?>">
     
   <link rel="stylesheet" href="<?=$websiteUrl?>/files/css/min.css?v=<?=$version?>">
+  <style>
+    /* Modern Modal Styling */
+    .modal-backdrop {
+      background-color: rgba(0, 0, 0, 0.85) !important;
+    }
+    
+    #modalavatars .modal-dialog {
+      max-width: 550px;
+    }
+    
+    #modalavatars .modal-content {
+      background-color: #2a2a2a;
+      border-radius: 16px;
+      border: none;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+    
+    #modalavatars .modal-header {
+      background-color: #2a2a2a;
+      border-bottom: none;
+      padding: 25px 30px 15px;
+      position: relative;
+    }
+    
+    #modalavatars .modal-title {
+      color: #ffffff;
+      font-size: 22px;
+      font-weight: 600;
+      width: 100%;
+      text-align: center;
+      margin: 0;
+    }
+    
+    #modalavatars .close {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: #999;
+      opacity: 1;
+      font-size: 28px;
+      font-weight: 300;
+      text-shadow: none;
+      transition: color 0.2s;
+    }
+    
+    #modalavatars .close:hover {
+      color: #fff;
+    }
+    
+    #modalavatars .modal-body {
+      background-color: #2a2a2a;
+      padding: 20px 30px 30px;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+    
+    /* Avatar Grid */
+    .avatar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 10px 0;
+    }
+    
+    .avatar-option {
+      cursor: pointer;
+      border-radius: 50%;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 3px solid transparent;
+      width: 100%;
+      aspect-ratio: 1;
+      position: relative;
+      background-color: #3a3a3a;
+    }
+    
+    .avatar-option:hover {
+      transform: scale(1.08);
+      border-color: #666;
+    }
+    
+    .avatar-option.selected {
+      border-color: #ff69b4;
+      box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.3);
+      transform: scale(1.05);
+    }
+    
+    .avatar-option.selected::after {
+      content: '✓';
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: #ff69b4;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+    
+    .avatar-option img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    
+    /* Close Button Styling */
+    .modal-footer {
+      background-color: #2a2a2a;
+      border-top: none;
+      padding: 0 30px 30px;
+      justify-content: center;
+    }
+    
+    .btn-close-modal {
+      background-color: #4a4a6a;
+      color: #ffffff;
+      border: none;
+      padding: 12px 50px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 200px;
+    }
+    
+    .btn-close-modal:hover {
+      background-color: #5a5a7a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(74, 74, 106, 0.4);
+    }
+    
+    .btn-close-modal:active {
+      transform: translateY(0);
+    }
+    
+    /* Profile Avatar Styling */
+    .profile-avatar {
+      cursor: pointer;
+      transition: transform 0.2s;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .profile-avatar:hover {
+      transform: scale(1.05);
+    }
+    
+    .avatar-edit-icon {
+      position: absolute;
+      bottom: -5px; /* Moved further down */
+      right: 5px;
+      background-color: rgba(0, 0, 0, 0.7); /* Darker background */
+      color: white; /* White color for the icon */
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: background-color 0.2s;
+    }
+    
+    .avatar-edit-icon:hover {
+      background-color: rgba(0, 0, 0, 0.9); /* Darker on hover */
+    }
+    
+    .avatar-edit-icon i {
+      font-size: 14px;
+    }
+    
+    /* Scrollbar Styling */
+    #modalavatars .modal-body::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    #modalavatars .modal-body::-webkit-scrollbar-track {
+      background: #1a1a1a;
+      border-radius: 4px;
+    }
+    
+    #modalavatars .modal-body::-webkit-scrollbar-thumb {
+      background: #4a4a4a;
+      border-radius: 4px;
+    }
+    
+    #modalavatars .modal-body::-webkit-scrollbar-thumb:hover {
+      background: #5a5a5a;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 576px) {
+      #modalavatars .modal-dialog {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+      }
+      
+      .avatar-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+      }
+      
+      #modalavatars .modal-header,
+      #modalavatars .modal-body,
+      .modal-footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      
+      #modalavatars .modal-title {
+        font-size: 20px;
+      }
+      
+      .btn-close-modal {
+        min-width: 150px;
+        padding: 10px 30px;
+      }
+    }
+    
+    @media (max-width: 400px) {
+      .avatar-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
   <script type="text/javascript">
     setTimeout(function () {
       var wpse326013 = document.createElement('link');
@@ -115,10 +349,13 @@ if(isset($_COOKIE['userID'])){
 }else{
    echo '<img id="preview-avatar" src="'.$websiteUrl.'/files/avatar/'.$fetch['image'].'">';
 }?>
+                  <div class="avatar-edit-icon" data-toggle="modal" data-target="#modalavatars">
+                    <i class="fas fa-pencil-alt"></i>
+                  </div>
                 </div>
               </div>
               <form class="preform" method="post" id="profile-form">
-                <input type="hidden" name="avatar_id" value="1">
+                <input type="hidden" name="avatar_id" id="selected-avatar" value="<?php echo $fetch['image']; ?>">
                 <div class="row">
                   <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="form-group">
@@ -151,15 +388,106 @@ if(isset($_COOKIE['userID'])){
 
     <?php include '../_php/footer.php' ?>
     <div id="mask-overlay"></div>
+    
+    <!-- Avatar Selection Modal -->
+    <div class="modal fade" id="modalavatars" tabindex="-1" role="dialog" aria-labelledby="avatarModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="avatarModalLabel">Choose Avatar</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="avatar-grid">
+              <?php
+                $avatarFolder = '../files/avatar/';
+                $avatarFiles = glob($avatarFolder . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+                
+                foreach($avatarFiles as $avatar) {
+                  $avatarName = basename($avatar);
+                  $avatarUrl = $websiteUrl . '/files/avatar/' . $avatarName;
+                  $isSelected = ($fetch['image'] == $avatarName) ? 'selected' : '';
+                  echo '<div class="avatar-option ' . $isSelected . '" data-avatar="' . $avatarName . '">';
+                  echo '<img src="' . $avatarUrl . '" alt="Avatar">';
+                  echo '</div>';
+                }
+              ?>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-close-modal" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js?v=<?=$version?>"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js?v=<?=$version?>"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/js.Cookies@rc/dist/js.cookie.min.js"></script>
     <script type="text/javascript" src="<?=$websiteUrl?>/files/js/app.js?v=<?=$version?>"></script>
     <script type="text/javascript" src="<?=$websiteUrl?>/files/js/comman.js?v=<?=$version?>"></script>
     <script type="text/javascript" src="<?=$websiteUrl?>/files/js/movie.js?v=<?=$version?>"></script>
     <link rel="stylesheet" href="<?=$websiteUrl?>/files/css/jquery-ui.css?v=<?=$version?>">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js?v=<?=$version?>"></script>
     <script type="text/javascript" src="<?=$websiteUrl?>/files/js/function.js?v=<?=$version?>"></script>
+    
+    <script>
+      $(document).ready(function() {
+        $('.avatar-option').click(function() {
+          $('.avatar-option').removeClass('selected');
+          $(this).addClass('selected');
+          var selectedAvatar = $(this).data('avatar');
+          $('#selected-avatar').val(selectedAvatar);
+          
+          updateAvatar(selectedAvatar);
+        });
+        
+        function updateAvatar(selectedAvatar) {
+          if (selectedAvatar) {
+            $('#preview-avatar').attr('src', '<?=$websiteUrl?>/files/avatar/' + selectedAvatar);
+            
+            $.ajax({
+              type: 'POST',
+              url: 'update_avatar.php',
+              data: { avatar: selectedAvatar, user_id: '<?=$user_id?>' },
+              success: function(response) {
+                $('.profile-header-cover').css('background-image', 'url(<?=$websiteUrl?>/files/avatar/' + selectedAvatar + ')');
+                
+                setTimeout(function() {
+                  $('#modalavatars').modal('hide');
+                  
+                  var alertHtml = '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
+                                  'Avatar updated successfully!' +
+                                  '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                                  '<span aria-hidden="true">&times;</span>' +
+                                  '</button>' +
+                                  '</div>';
+                  $('.profile-box-account').prepend(alertHtml);
+                  
+                  setTimeout(function() {
+                    $('.alert').fadeOut('slow', function() {
+                      $(this).remove();
+                    });
+                  }, 3000);
+                }, 300);
+              },
+              error: function(xhr, status, error) {
+                var alertHtml = '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+                                'Error updating avatar. Please try again.' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                                '</button>' +
+                                '</div>';
+                $('.profile-box-account').prepend(alertHtml);
+              }
+            });
+          }
+        }
+      });
+    </script>
+    
     <div style="display:none;">
     </div>
   </div>
